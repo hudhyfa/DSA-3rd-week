@@ -129,6 +129,7 @@ class BST {
 
     min(root) {
         if(!root.left) {
+            // console.log(root.val);
             return root.val;
         } else {
             this.min(root.left);
@@ -137,10 +138,38 @@ class BST {
 
     max(root) {
         if(!root.right) {
+            // console.log(root.val);
             return root.val;
         } else {
             this.max(root.right);
         }
+    }
+
+    delete(val) {
+        this.root = this.deleteNode(this.root, val);
+    }
+
+    deleteNode(root, val) {
+        if(root === null) {
+            return root;
+        }
+        if(val < root.val) {
+            root.left = this.deleteNode(root.left, val);
+        } else if(val > root.val) {
+            root.right = this.deleteNode(root.right, val);
+        } else {
+            if(!root.right && !root.left) {
+                return null;
+            }
+            if(!root.right) {
+                return root.left;
+            } else if(!root.left) {
+                return root.right;
+            }
+            root.val = this.min(root.right);
+            root.right = this.deleteNode(root.right, root.val);
+        }
+        return root;
     }
 }
 
@@ -150,13 +179,25 @@ const bst = new BST();
 bst.insert(10);
 bst.insert(8);
 bst.insert(12);
+bst.insert(13);
+bst.insert(11);
 bst.insert(4);
 bst.insert(6);
 
-
+// console.log(bst.search(bst.root, 80));
 
 // bst.preOrder(bst.root);
 // bst.inOrder(bst.root);
 // bst.postOrder(bst.root);
 // bst.levelOrderRay(bst.root);
+
+// bst.max(bst.root);
+
+// bst.levelOrderRay(bst.root);
+
+// bst.delete(6);
+bst.delete(12);
+
+bst.levelOrderRay(bst.root);
+
 
