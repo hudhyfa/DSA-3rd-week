@@ -63,6 +63,38 @@ class Heap {
     show() {
         console.log(this.data);
     }
+
+    heapSort() {
+        let lastChildIndex = this.data.length - 1;
+
+        while(lastChildIndex >= 0) {
+            [this.data[lastChildIndex], this.data[0]] = [this.data[0], this.data[lastChildIndex]];
+            this.heapify(lastChildIndex, 0);
+            lastChildIndex --;
+        }
+
+        console.log(this.data);
+    }
+
+    heapify(length, parentIndex) {
+        let largestIndex = parentIndex;
+        let leftChildIndex = parentIndex * 2 + 1;
+        let rightChildIndex = leftChildIndex + 1;
+
+        if(leftChildIndex < length && this.data[leftChildIndex] > this.data[largestIndex]) {
+            largestIndex = leftChildIndex;
+        }
+        if(rightChildIndex < length && this.data[rightChildIndex] > this.data[largestIndex]) {
+            largestIndex = rightChildIndex;
+        }
+
+        if(parentIndex !== largestIndex) {
+            [this.data[parentIndex], this.data[largestIndex]] = [this.data[largestIndex], this.data[parentIndex]];
+            this.heapify(length, largestIndex);
+        }
+
+        return this.data;
+    }
 }
 
 let heap = new Heap();
@@ -70,9 +102,11 @@ heap.push(100);
 heap.push(80);
 heap.push(60);
 heap.push(40);
+heap.push(20);
+heap.push(0);
 heap.show();
 
-heap.poll();
-heap.poll();
-heap.poll();
-heap.show();
+// heap.poll();
+// heap.poll();
+// heap.poll();
+heap.heapSort();
