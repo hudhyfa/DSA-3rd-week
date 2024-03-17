@@ -33,12 +33,15 @@ function heapSort(arr) {
         parentIndex --;
     }
 
+    console.log("after max heapify", arr);
+
     while(lastChildIndex >= 0) {
         [arr[lastChildIndex], arr[0]] = [arr[0], arr[lastChildIndex]];
         lastChildIndex --;
         maxHeapify(arr, lastChildIndex, 0);
     }
 
+    console.log("after sorting", arr);
     return arr;
 }
 

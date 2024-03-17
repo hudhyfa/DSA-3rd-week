@@ -53,7 +53,6 @@ class Graph {
         visited.push(vertex);
         while(queue.length) {
             let v = queue.shift();
-            console.log(v);
             for(let vx of this.adjacentList[v]) {
                 if(!visited.includes(vx)) {
                     visited.push(vx);
